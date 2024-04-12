@@ -11,7 +11,6 @@
     "lint": "eslint . --ext ts",
     "lint:fix": "eslint . --fix --ext ts",
     "format": "prettier --write src/*"
-
   },
   "author": "ecxtacy",
   "license": "Apache-2.0",

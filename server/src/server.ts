@@ -1,12 +1,10 @@
 import express from "express";
+import v1Router from "./routes/v1.router";
 
 const app = express();
 
-app.get("/", (req: express.Request, res: express.Response) => {
-  const x = "hi";
-  res.send("pulse-keeper server is up !!!");
-});
+app.get("/api/v1", v1Router);
 
-app.listen(3000, () => {
-  console.log("Server started on port 3000");
+app.listen(process.env.SERVER_PORT ?? 3000, () => {
+  console.log(`Server started on port ${process.env.SERVER_PORT ?? 3000}`);
 });
