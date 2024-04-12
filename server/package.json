@@ -10,7 +10,8 @@
     "start": "node dist/server.js",
     "lint": "eslint . --ext ts",
     "lint:fix": "eslint . --fix --ext ts",
-    "format": "prettier --write src/*"
+    "format": "prettier --write src/*",
+    "db:docker": "bash ../run_postgres_docker.sh"
   },
   "author": "ecxtacy",
   "license": "Apache-2.0",
