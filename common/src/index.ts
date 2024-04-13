@@ -1,2 +1,2 @@
-export { userDataSchema } from './user';
+export { userDataSchema, UserData } from './user';
 export { ResponseData } from './response';
