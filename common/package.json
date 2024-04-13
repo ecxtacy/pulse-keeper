@@ -1,0 +1,12 @@
+{
+  "name": "@ecxtacy/pulse-keeper-common",
+  "version": "1.0.0",
+  "description": "Common packages required by server and client for pulse-keeper",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

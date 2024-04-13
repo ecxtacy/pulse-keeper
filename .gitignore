@@ -4,3 +4,6 @@ server/.env
 
 docs/.venv
 node_modules
+
+common/dist
+common/node_modules
