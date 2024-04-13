@@ -1,2 +1,2 @@
-
-export * as userTypes from './user'
+export { userDataSchema } from './user';
+export { ResponseData } from './response';

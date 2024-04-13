@@ -1,5 +1,6 @@
 import express from "express";
 import { userTypes } from "@ecxtacy/pulse-keeper-common";
+import * as u from "@ecxtacy/pulse-keeper-common"
 
 const getProfile = (req: express.Request, res: express.Response) => {};
 const createUser = (req: express.Request, res: express.Response) => {
@@ -11,7 +12,7 @@ const createUser = (req: express.Request, res: express.Response) => {
     // Check if user exists with same credentials.
     // If not, create new user and return success response.
     // Otherwise send error response.
-    res.send("validation success");
+    res.status(200).json({ u });
   } else {
     res.send("validation error");
   }
