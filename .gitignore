@@ -3,3 +3,4 @@ server/dist
 server/.env
 
 docs/.venv
+node_modules
