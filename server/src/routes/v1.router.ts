@@ -6,9 +6,11 @@ import { authController } from "../controllers/auth.controller";
 
 const v1Router = express.Router();
 
-v1Router.get("/", (req, res) => {
+function apiGreet(req: express.Request, res: express.Response) {
   res.send("pulse-keeper api");
-});
+}
+
+v1Router.get("/", apiGreet);
 
 v1Router.post("/signup", userController.createUser);
 v1Router.post("/signin", authController.signinUser);

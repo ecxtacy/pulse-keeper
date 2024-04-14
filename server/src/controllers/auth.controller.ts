@@ -25,7 +25,7 @@ const signinUser = async (
     if (verified) {
       // Return JWT in the set-cookie header.
       const jwtToken = generateJWT({ username: userCredentials.username });
-      res.cookie('Pulse_keeper_token', jwtToken, {
+      res.cookie("Pulse_keeper_token", jwtToken, {
         httpOnly: true,
         sameSite: true,
         maxAge: 60 * 60,
