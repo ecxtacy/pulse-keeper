@@ -19,7 +19,7 @@ model User {
   photo_link String?
   age        Int?
   profession String?
-  deleted    Boolean
+  deleted    Boolean @default(false)
 
   Grind Grind[]
 }
