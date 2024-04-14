@@ -18,9 +18,11 @@ export const authorize = async (
 ) => {
   const token = req.cookies["Pulse_keeper_token"];
   if (!token) {
-    res
-      .status(HttpStatusCode.FORBIDDEN)
-      .json(new ResponseData(false, null, { message: "Unauthorized" }));
+    res.status(HttpStatusCode.FORBIDDEN).json(
+      new ResponseData(false, null, {
+        message: "Unauthorized, no token provided.",
+      }),
+    );
   } else {
     try {
       const payload = verifyJWT(token);
@@ -29,9 +31,11 @@ export const authorize = async (
       };
       next();
     } catch (err) {
-      res
-        .status(HttpStatusCode.FORBIDDEN)
-        .json(new ResponseData(false, null, { message: "Unauthorized" }));
+      res.status(HttpStatusCode.FORBIDDEN).json(
+        new ResponseData(false, null, {
+          message: "Unauthorized, incorrect or expired token.",
+        }),
+      );
     }
   }
 };
