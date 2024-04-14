@@ -4,6 +4,7 @@ import helmet from "helmet";
 import morgan from "morgan";
 import cors from "cors";
 import compression from "compression";
+import cookieParser from "cookie-parser";
 
 const app = express();
 
@@ -13,6 +14,7 @@ app.use(morgan("tiny"));
 app.use(cors({ origin: "*" }));
 app.use(express.json());
 app.use(compression());
+app.use(cookieParser());
 
 app.use("/api/v1", v1Router);
 

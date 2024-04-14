@@ -4,6 +4,7 @@ import { db } from "../db/user";
 import { verifyPassword } from "../lib/bcrypt";
 import { HttpStatusCode } from "../lib/httpStatusCodes";
 import { ResponseData } from "@ecxtacy/pulse-keeper-common";
+import { generateJWT } from "../lib/jwt";
 
 const signinUser = async (
   req: express.Request,
@@ -23,6 +24,12 @@ const signinUser = async (
     );
     if (verified) {
       // Return JWT in the set-cookie header.
+      const jwtToken = generateJWT({ username: userCredentials.username });
+      res.cookie('Pulse_keeper_token', jwtToken, {
+        httpOnly: true,
+        sameSite: true,
+        maxAge: 60 * 60,
+      });
       res.json(user);
     } else {
       // Return response saying incorrect password.
