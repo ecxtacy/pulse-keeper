@@ -4,7 +4,14 @@ import { ResponseData } from "@ecxtacy/pulse-keeper-common";
 import { HttpStatusCode } from "../lib/httpStatusCodes";
 import { checkUserExists, db } from "../db/user";
 
-const getProfile = (req: express.Request, res: express.Response) => {};
+const getProfile = async (req: express.Request, res: express.Response) => {
+  const username = req.user?.username;
+  console.log("username", username);
+  const profile = username ? await db.getProfile(username) : null;
+
+  res.status(HttpStatusCode.OK).json(new ResponseData(true, null, { profile }));
+};
+
 const createUser = async (req: express.Request, res: express.Response) => {
   // zod input validation
   const data: UserData = req.body;
