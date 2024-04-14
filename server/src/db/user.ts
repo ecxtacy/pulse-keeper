@@ -42,4 +42,17 @@ export const getProfile = async (username: string) => {
   return profile;
 };
 
-export const db = { checkUserExists, createUser, findUser, getProfile };
+const deleteUser = async (username: string) => {
+  const user = await prisma.user.update({
+    where: { username },
+    data: { deleted: true },
+  });
+};
+
+export const db = {
+  checkUserExists,
+  createUser,
+  findUser,
+  getProfile,
+  deleteUser,
+};

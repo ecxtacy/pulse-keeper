@@ -55,7 +55,23 @@ const createUser = async (req: express.Request, res: express.Response) => {
   }
 };
 const updateProfile = (req: express.Request, res: express.Response) => {};
-const deleteUser = (req: express.Request, res: express.Response) => {};
+
+const deleteUser = async (req: express.Request, res: express.Response) => {
+  const username = req.user?.username;
+  try {
+    username && (await db.deleteUser(username));
+    res
+      .status(HttpStatusCode.OK)
+      .json(new ResponseData(true, null, { message: "User deleted" }));
+  } catch (err) {
+    console.log(err);
+    res
+      .status(HttpStatusCode.INTERNAL_SERVER_ERROR)
+      .json(
+        new ResponseData(false, null, { message: "Unable to delete user." }),
+      );
+  }
+};
 
 export const userController = {
   getProfile,
