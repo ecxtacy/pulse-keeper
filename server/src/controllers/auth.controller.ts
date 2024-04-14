@@ -40,4 +40,11 @@ const signinUser = async (
   }
 };
 
-export const authController = { signinUser };
+const logoutUser = async (req: express.Request, res: express.Response) => {
+  res.clearCookie("Pulse_keeper_token");
+  res
+    .status(HttpStatusCode.OK)
+    .json(new ResponseData(true, null, { message: "Logged out" }));
+};
+
+export const authController = { signinUser, logoutUser };

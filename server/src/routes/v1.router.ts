@@ -16,6 +16,8 @@ v1Router.get("/", apiGreet);
 v1Router.post("/signup", userController.createUser);
 v1Router.post("/signin", authController.signinUser);
 
+v1Router.post("/logout", authorize, authController.logoutUser);
+
 v1Router.use("/profile", authorize, userRouter);
 v1Router.use("/grind", authorize, grindRouter);
 
