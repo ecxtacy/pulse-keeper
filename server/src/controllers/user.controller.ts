@@ -18,13 +18,11 @@ const createUser = async (req: express.Request, res: express.Response) => {
     const userExists = await checkUserExists(data.username, data.email);
     if (userExists) {
       console.log("User already exists");
-      res
-        .status(HttpStatusCode.BAD_REQUEST)
-        .json(
-          new ResponseData(false, null, {
-            message: "User already exists, try different credentials.",
-          }),
-        );
+      res.status(HttpStatusCode.BAD_REQUEST).json(
+        new ResponseData(false, null, {
+          message: "User already exists, try different credentials.",
+        }),
+      );
       return;
     }
 

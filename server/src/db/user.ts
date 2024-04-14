@@ -21,4 +21,9 @@ export const createUser = async (userData: UserData) => {
   return user;
 };
 
-export const db = { checkUserExists, createUser };
+export const findUser = async (username: string) => {
+  const user = await prisma.user.findUnique({ where: { username } });
+  return user;
+};
+
+export const db = { checkUserExists, createUser, findUser };
