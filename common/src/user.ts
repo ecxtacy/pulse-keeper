@@ -1,6 +1,7 @@
 import { z } from "zod";
 
 export const userEditDataSchema = z.object({
+  initial_username: z.string(),
   username: z.string().optional(),
   email: z.string().email().optional(),
   password: z.string().min(4).optional(),
