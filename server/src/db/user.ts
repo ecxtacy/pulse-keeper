@@ -1,5 +1,5 @@
 import { PrismaClient } from "@prisma/client";
-import { UserData } from "@ecxtacy/pulse-keeper-common";
+import { UserData, UserEditData } from "@ecxtacy/pulse-keeper-common";
 import { hashPassword } from "../lib/bcrypt";
 const prisma = new PrismaClient();
 
@@ -49,10 +49,26 @@ const deleteUser = async (username: string) => {
   });
 };
 
+const editUserData = async (data: UserEditData) => {
+  let key: keyof typeof data;
+  const editData = { ...data, initial_username: undefined };
+  for (key in editData) {
+    if (!data[key]) {
+      delete data[key];
+    }
+  }
+
+  const user = await prisma.user.update({
+    where: { username: data.initial_username },
+    data: { ...editData },
+  });
+};
+
 export const db = {
   checkUserExists,
   createUser,
   findUser,
   getProfile,
   deleteUser,
+  editUserData,
 };

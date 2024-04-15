@@ -1,5 +1,9 @@
 import express from "express";
-import { UserData, userDataSchema } from "@ecxtacy/pulse-keeper-common";
+import {
+  UserData,
+  userDataSchema,
+  userEditDataSchema,
+} from "@ecxtacy/pulse-keeper-common";
 import { ResponseData } from "@ecxtacy/pulse-keeper-common";
 import { HttpStatusCode } from "../lib/httpStatusCodes";
 import { checkUserExists, db } from "../db/user";
@@ -54,7 +58,27 @@ const createUser = async (req: express.Request, res: express.Response) => {
       .json(new ResponseData(false, null, {}));
   }
 };
-const updateProfile = (req: express.Request, res: express.Response) => {};
+
+const updateProfile = async (req: express.Request, res: express.Response) => {
+  // zod validation of data
+  const data = req.body;
+  const validation = userEditDataSchema.safeParse(data);
+
+  if (validation.success) {
+    // todo: first check if any user exists with the same username or email
+    // then update the user profile
+    await db.editUserData(validation.data);
+    res
+      .status(HttpStatusCode.OK)
+      .json(
+        new ResponseData(true, null, { message: "User updated successfully." }),
+      );
+  } else {
+    res
+      .status(HttpStatusCode.BAD_REQUEST)
+      .json(new ResponseData(false, null, { message: "Invalid data send" }));
+  }
+};
 
 const deleteUser = async (req: express.Request, res: express.Response) => {
   const username = req.user?.username;
