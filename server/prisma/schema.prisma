@@ -27,7 +27,7 @@ model User {
 model Grind {
   id       Int     @id @default(autoincrement())
   name     String  @unique
-  archived Boolean
+  archived Boolean @default(false)
 
   user_id  Int
   user     User       @relation(fields: [user_id], references: [id])
