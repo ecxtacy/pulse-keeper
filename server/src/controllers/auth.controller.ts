@@ -1,6 +1,6 @@
 import express from "express";
 import { UserCredentials } from "../types/auth";
-import { db } from "../db/user";
+import db from "../db/db";
 import { verifyPassword } from "../lib/bcrypt";
 import { HttpStatusCode } from "../lib/httpStatusCodes";
 import { ResponseData } from "@ecxtacy/pulse-keeper-common";
@@ -11,7 +11,7 @@ const signinUser = async (
   res: express.Response,
 ): Promise<void> => {
   const userCredentials: UserCredentials = req.body;
-  const user = await db.findUser(userCredentials.username);
+  const user = await db.user.findUser(userCredentials.username);
   if (!user) {
     // Return response saying incorrect username.
     res
