@@ -49,18 +49,17 @@ const deleteUser = async (username: string) => {
   });
 };
 
-const editUserData = async (data: UserEditData) => {
+const editUserData = async (data: UserEditData, username: string) => {
   let key: keyof typeof data;
-  const editData = { ...data, initial_username: undefined };
-  for (key in editData) {
+  for (key in data) {
     if (!data[key]) {
       delete data[key];
     }
   }
 
   const user = await prisma.user.update({
-    where: { username: data.initial_username },
-    data: { ...editData },
+    where: { username },
+    data: { ...data },
   });
 };
 

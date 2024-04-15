@@ -62,12 +62,13 @@ const createUser = async (req: express.Request, res: express.Response) => {
 const updateProfile = async (req: express.Request, res: express.Response) => {
   // zod validation of data
   const data = req.body;
+  const username = req.user?.username;
   const validation = userEditDataSchema.safeParse(data);
 
   if (validation.success) {
     // todo: first check if any user exists with the same username or email
     // then update the user profile
-    await db.editUserData(validation.data);
+    username && (await db.editUserData(validation.data, username));
     res
       .status(HttpStatusCode.OK)
       .json(
