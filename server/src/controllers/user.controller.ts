@@ -6,12 +6,12 @@ import {
 } from "@ecxtacy/pulse-keeper-common";
 import { ResponseData } from "@ecxtacy/pulse-keeper-common";
 import { HttpStatusCode } from "../lib/httpStatusCodes";
-import { checkUserExists, db } from "../db/user";
+import db from "../db/db";
 
 const getProfile = async (req: express.Request, res: express.Response) => {
   const username = req.user?.username;
   console.log("username", username);
-  const profile = username ? await db.getProfile(username) : null;
+  const profile = username ? await db.user.getProfile(username) : null;
 
   res.status(HttpStatusCode.OK).json(new ResponseData(true, null, { profile }));
 };
@@ -26,7 +26,7 @@ const createUser = async (req: express.Request, res: express.Response) => {
     // If not, create new user and return success response.
     // Otherwise send error response.
 
-    const userExists = await checkUserExists(data.username, data.email);
+    const userExists = await db.user.checkUserExists(data.username, data.email);
     if (userExists) {
       console.log("User already exists");
       res.status(HttpStatusCode.BAD_REQUEST).json(
@@ -39,7 +39,7 @@ const createUser = async (req: express.Request, res: express.Response) => {
 
     // Add user to the database.
     try {
-      await db.createUser(data);
+      await db.user.createUser(data);
     } catch (err) {
       console.log(err);
       res
@@ -68,7 +68,7 @@ const updateProfile = async (req: express.Request, res: express.Response) => {
   if (validation.success) {
     // todo: first check if any user exists with the same username or email
     // then update the user profile
-    username && (await db.editUserData(validation.data, username));
+    username && (await db.user.editUserData(validation.data, username));
     res
       .status(HttpStatusCode.OK)
       .json(
@@ -84,7 +84,7 @@ const updateProfile = async (req: express.Request, res: express.Response) => {
 const deleteUser = async (req: express.Request, res: express.Response) => {
   const username = req.user?.username;
   try {
-    username && (await db.deleteUser(username));
+    username && (await db.user.deleteUser(username));
     res
       .status(HttpStatusCode.OK)
       .json(new ResponseData(true, null, { message: "User deleted" }));

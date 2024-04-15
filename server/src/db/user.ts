@@ -42,14 +42,14 @@ export const getProfile = async (username: string) => {
   return profile;
 };
 
-const deleteUser = async (username: string) => {
+export const deleteUser = async (username: string) => {
   const user = await prisma.user.update({
     where: { username },
     data: { deleted: true },
   });
 };
 
-const editUserData = async (data: UserEditData, username: string) => {
+export const editUserData = async (data: UserEditData, username: string) => {
   let key: keyof typeof data;
   for (key in data) {
     if (!data[key]) {
@@ -61,13 +61,4 @@ const editUserData = async (data: UserEditData, username: string) => {
     where: { username },
     data: { ...data },
   });
-};
-
-export const db = {
-  checkUserExists,
-  createUser,
-  findUser,
-  getProfile,
-  deleteUser,
-  editUserData,
 };
