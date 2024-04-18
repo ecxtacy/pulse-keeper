@@ -32,7 +32,7 @@
     "typescript": "^5.4.4"
   },
   "dependencies": {
-    "@ecxtacy/pulse-keeper-common": "^2.1.0",
+    "@ecxtacy/pulse-keeper-common": "^2.2.3",
     "@prisma/client": "^5.12.1",
     "@types/bcrypt": "^5.0.2",
     "@types/cookie-parser": "^1.4.7",
