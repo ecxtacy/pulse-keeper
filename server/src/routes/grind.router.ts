@@ -1,7 +1,10 @@
 import express from "express";
 import { grindController } from "../controllers/grind.controller";
+import activityRouter from "./activity.router";
 
 const grindRouter = express.Router();
+
+grindRouter.use("/activity", activityRouter);
 
 grindRouter.get("/", grindController.getGrind);
 grindRouter.post("/", grindController.createGrind);
