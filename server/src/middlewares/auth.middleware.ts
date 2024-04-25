@@ -16,6 +16,12 @@ export const authorize = async (
   res: express.Response,
   next: express.NextFunction,
 ) => {
+
+  if(process.env.NODE_ENV !== 'production') {
+    next();
+    return;
+  }
+
   const token = req.cookies["Pulse_keeper_token"];
   if (!token) {
     res.status(HttpStatusCode.FORBIDDEN).json(
