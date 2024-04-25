@@ -33,7 +33,7 @@ export const getProfile = async (username: string) => {
       username: true,
       first_name: true,
       last_name: true,
-      age: true,
+      dob: true,
       photo_link: true,
       profession: true,
       email: true,

@@ -17,7 +17,7 @@ export const userDataSchema = z.object({
   password: z.string().min(4),
   first_name: z.string(),
   last_name: z.string(),
-  age: z.number().optional(),
+  dob: z.string().datetime().optional(),
   profession: z.string().optional(),
 });
 
