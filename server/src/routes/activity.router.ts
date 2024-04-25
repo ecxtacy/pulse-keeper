@@ -8,5 +8,4 @@ activityRouter.post("/", activityController.createActivity);
 activityRouter.put("/", activityController.editActivity);
 activityRouter.delete("/", activityController.deleteActivity);
 
-
 export default activityRouter;
