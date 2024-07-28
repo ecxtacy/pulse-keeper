@@ -11,7 +11,8 @@
     "lint": "eslint . --ext ts",
     "lint:fix": "eslint . --fix --ext ts",
     "format": "prettier --write src/*",
-    "db:docker": "bash ../tools/run_postgres_docker.sh"
+    "db:docker": "bash ../tools/run_postgres_docker.sh",
+    "db:studio": "npx prisma studio"
   },
   "author": "ecxtacy",
   "license": "Apache-2.0"

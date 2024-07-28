@@ -1,5 +1,5 @@
 import { PrismaClient } from "@prisma/client";
-import { UserData, UserEditData } from "@ecxtacy/pulse-keeper-common";
+import { UserData, UserEditData } from "../interfaces";
 import { hashPassword } from "../lib/bcrypt";
 const prisma = new PrismaClient();
 
@@ -21,8 +21,26 @@ export const createUser = async (userData: UserData) => {
   return user;
 };
 
+export const findUserPassword = async (username: string) => {
+  return await prisma.user.findUnique({ 
+    where: {username},
+    select: {
+      password: true
+    }
+  });
+};
+
 export const findUser = async (username: string) => {
-  const user = await prisma.user.findUnique({ where: { username } });
+  const user = await prisma.user.findUnique({ 
+    where: { username }, 
+    select: {
+      username: true,
+      first_name: true,
+      last_name: true,
+      email: true,
+      password: true,
+    }
+  });
   return user;
 };
 

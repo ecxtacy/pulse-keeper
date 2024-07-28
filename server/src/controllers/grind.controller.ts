@@ -1,4 +1,4 @@
-import { ResponseData, grindDataSchema } from "@ecxtacy/pulse-keeper-common";
+import { ResponseData, grindDataSchema } from "../interfaces";
 import express from "express";
 import { HttpStatusCode } from "../lib/httpStatusCodes";
 import db from "../db/db";

@@ -1,6 +1,7 @@
 import express from "express";
 import { HttpStatusCode } from "../lib/httpStatusCodes";
-import { ResponseData, activityDataSchema } from "@ecxtacy/pulse-keeper-common";
+import { ResponseData } from "../interfaces";
+import { activityDataSchema } from "../interfaces";
 import db from "../db/db";
 
 const createActivity = async (req: express.Request, res: express.Response) => {

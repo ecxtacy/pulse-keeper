@@ -1,4 +1,4 @@
-import { GrindData } from "@ecxtacy/pulse-keeper-common";
+import { GrindData } from "../interfaces";
 import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();

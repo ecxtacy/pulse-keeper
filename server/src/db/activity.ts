@@ -1,4 +1,4 @@
-import { ActivityData } from "@ecxtacy/pulse-keeper-common";
+import { ActivityData } from "../interfaces";
 import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();

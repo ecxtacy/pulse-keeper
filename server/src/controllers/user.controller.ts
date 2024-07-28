@@ -3,8 +3,8 @@ import {
   UserData,
   userDataSchema,
   userEditDataSchema,
-} from "@ecxtacy/pulse-keeper-common";
-import { ResponseData } from "@ecxtacy/pulse-keeper-common";
+} from "../interfaces/userData";
+import { ResponseData } from "../interfaces";
 import { HttpStatusCode } from "../lib/httpStatusCodes";
 import db from "../db/db";
 
@@ -19,16 +19,16 @@ const getProfile = async (req: express.Request, res: express.Response) => {
 const createUser = async (req: express.Request, res: express.Response) => {
   // zod input validation
   const data: UserData = req.body;
+  data.dob = data.dob ? new Date(data.dob) : data.dob;
   const validation = userDataSchema.safeParse(data);
-
+  
   if (validation.success) {
     // Check if user exists with same credentials.
     // If not, create new user and return success response.
     // Otherwise send error response.
-
+    
     const userExists = await db.user.checkUserExists(data.username, data.email);
     if (userExists) {
-      console.log("User already exists");
       res.status(HttpStatusCode.BAD_REQUEST).json(
         new ResponseData(false, null, {
           message: "User already exists, try different credentials.",
@@ -55,7 +55,7 @@ const createUser = async (req: express.Request, res: express.Response) => {
   } else {
     res
       .status(HttpStatusCode.BAD_REQUEST)
-      .json(new ResponseData(false, null, {}));
+      .json(new ResponseData(false, validation.error, {}));
   }
 };
 

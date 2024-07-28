@@ -1,7 +1,7 @@
 import express from "express";
 import { verifyJWT } from "../lib/jwt";
 import { HttpStatusCode } from "../lib/httpStatusCodes";
-import { ResponseData } from "@ecxtacy/pulse-keeper-common";
+import { ResponseData } from "../interfaces";
 
 // When the request has been authorized.
 declare module "express" {
