@@ -21,7 +21,8 @@ model User {
   profession String?
   deleted    Boolean   @default(false)
 
-  Grind Grind[]
+  Grind      Grind[]
+  LoginToken LoginToken?
 }
 
 model Grind {
@@ -44,4 +45,12 @@ model Activity {
 
   grind_id Int
   grind    Grind @relation(fields: [grind_id], references: [id])
+}
+
+model LoginToken {
+  id       String @id @default(uuid())
+  token    String
+  username String @unique
+
+  user User @relation(fields: [username], references: [username])
 }
