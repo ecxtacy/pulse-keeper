@@ -5,6 +5,10 @@ import { jwtData } from "../types/jwt";
 const JWT_SECRET_KEY = "temporary_jwt_secret";
 const JWT_EXPIRATION_IN_SECONDS = 60 * 60;
 
+export const decodeUsername = (token: string) => {
+  return (jwt.decode(token) as JwtPayload).username;
+}; 
+
 export const generateJWT = (data: jwtData) => {
   const token = jwt.sign(data, JWT_SECRET_KEY, {
     expiresIn: JWT_EXPIRATION_IN_SECONDS,

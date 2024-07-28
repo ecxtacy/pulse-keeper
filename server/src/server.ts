@@ -10,7 +10,7 @@ const app = express();
 
 // Add essential middlewares
 app.use(helmet());
-app.use(morgan("tiny"));
+app.use(morgan("dev"));
 app.use(cors({ origin: "*" }));
 app.use(express.json());
 app.use(compression());

@@ -5,6 +5,8 @@ import { verifyPassword } from "../lib/bcrypt";
 import { HttpStatusCode } from "../lib/httpStatusCodes";
 import { ResponseData } from "../interfaces";
 import { generateJWT } from "../lib/jwt";
+import { logintoken__upsert } from "../db/login_token";
+import { server_config } from "../config";
 
 const signinUser = async (
   req: express.Request,
@@ -23,8 +25,14 @@ const signinUser = async (
       user.password,
     );
     if (verified) {
-      // Return JWT in the set-cookie header.
+      // Generate JWT.
       const jwtToken = generateJWT({ username: userCredentials.username });
+
+      if(server_config.single_place_only_login) {
+        // Update the most recent JWT.
+        await logintoken__upsert(userCredentials.username, jwtToken);
+      }
+
       res.cookie("Pulse_keeper_token", jwtToken, {
         httpOnly: true,
         sameSite: true,
